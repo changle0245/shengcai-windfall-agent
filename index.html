@@ -13,6 +13,8 @@
 <div class="notice"><b>安全边界：</b>这是能力展示页，不连接 API、不暴露凭据、不允许访客调用真实 Agent。收藏、评论、报名、付费和发布均需人工确认。</div>
 <h2>它能做什么</h2><div class="grid"><div class="card"><b>检索</b><br>按关键词找到相关风向标。</div><div class="card"><b>取证</b><br>保留作者、标签、实体 ID 和原文链接。</div><div class="card"><b>拆解</b><br>区分事实、推断、风险和待验证项。</div><div class="card"><b>行动</b><br>生成 7 天最小验证计划与指标。</div></div>
 <h2>已验证运行</h2><p>已用 <code>searchTopic → topicDetail</code> 读取真实主题《如何把你的业务流程做成 AI Agent 员工》，并生成本地验收记录。</p>
+<h2>三样例回归</h2><div class="grid"><div class="card"><b>典型输入</b><br>AI Agent 组织变化主题：主流程通过。</div><div class="card"><b>复杂输入</b><br>Agent 员工长文：保留限制条件和证据。</div><div class="card"><b>真实关注场景</b><br>Agent/FDE 趋势主题：作者判断与事实分层。</div></div>
+<p>每次输出都必须保留实体 ID、详情链接、事实/推断/待验证分层，以及 7 天验证计划；任何立项、写入或发布仍需人工确认。</p>
 <h2>如何使用</h2><ol><li>提供关键词或 SCYS 主题链接。</li><li>要求“只读拆解，保留证据，不执行外部写操作”。</li><li>检查证据链接与实体 ID。</li><li>人工确认后再决定是否归档或发布。</li></ol>
 <h2>能力边界</h2><p>不能替代用户访谈、成本核算、法律/合规判断，也不会仅凭热度断言项目可行。SCYS 无权限或接口异常时会停止，不以猜测补全正文。</p>
 <p class="muted">版本：公开展示候选 v1 · 不含密钥、Token、Cookie 或个人隐私</p>
