@@ -1,22 +1,75 @@
 <!doctype html>
 <html lang="zh-CN">
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>生财风向标拆解助理</title>
-<style>
-:root{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:#172033;background:#f6f8fc}body{max-width:900px;margin:0 auto;padding:28px 18px;line-height:1.7}main{background:#fff;border:1px solid #e5eaf2;border-radius:18px;padding:34px;box-shadow:0 10px 32px #17203312}h1{margin:0 0 8px}h2{color:#2452b5;margin-top:28px}.muted{color:#687386}.tag{display:inline-block;background:#edf3ff;color:#2452b5;border-radius:999px;padding:3px 11px;margin:3px;font-size:13px}.notice{background:#fff8e5;border-left:4px solid #e3a300;padding:12px 16px;border-radius:8px;margin:18px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.card{border:1px solid #edf0f5;border-radius:10px;padding:14px}code{background:#f0f2f5;padding:2px 5px;border-radius:4px}a{color:#2452b5}
-</style>
-<main>
-<p class="muted">Agent 航海 · 第六关公开展示页</p>
-<h1>生财风向标拆解助理</h1>
-<p>把可访问的生财主题变成有证据、可复核、能行动的项目判断。</p>
-<span class="tag">SCYS 只读</span><span class="tag">证据驱动</span><span class="tag">7 天验证</span><span class="tag">人工复核</span>
-<div class="notice"><b>安全边界：</b>这是能力展示页，不连接 API、不暴露凭据、不允许访客调用真实 Agent。收藏、评论、报名、付费和发布均需人工确认。</div>
-<h2>它能做什么</h2><div class="grid"><div class="card"><b>检索</b><br>按关键词找到相关风向标。</div><div class="card"><b>取证</b><br>保留作者、标签、实体 ID 和原文链接。</div><div class="card"><b>拆解</b><br>区分事实、推断、风险和待验证项。</div><div class="card"><b>行动</b><br>生成 7 天最小验证计划与指标。</div></div>
-<h2>已验证运行</h2><p>已用 <code>searchTopic → topicDetail</code> 读取真实主题《如何把你的业务流程做成 AI Agent 员工》，并生成本地验收记录。</p>
-<h2>三样例回归</h2><div class="grid"><div class="card"><b>典型输入</b><br>AI Agent 组织变化主题：主流程通过。</div><div class="card"><b>复杂输入</b><br>Agent 员工长文：保留限制条件和证据。</div><div class="card"><b>真实关注场景</b><br>Agent/FDE 趋势主题：作者判断与事实分层。</div></div>
-<p>每次输出都必须保留实体 ID、详情链接、事实/推断/待验证分层，以及 7 天验证计划；任何立项、写入或发布仍需人工确认。</p>
-<h2>如何使用</h2><ol><li>提供关键词或 SCYS 主题链接。</li><li>要求“只读拆解，保留证据，不执行外部写操作”。</li><li>检查证据链接与实体 ID。</li><li>人工确认后再决定是否归档或发布。</li></ol>
-<h2>能力边界</h2><p>不能替代用户访谈、成本核算、法律/合规判断，也不会仅凭热度断言项目可行。SCYS 无权限或接口异常时会停止，不以猜测补全正文。</p>
-<p class="muted">版本：公开展示候选 v1 · 不含密钥、Token、Cookie 或个人隐私</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="可直接使用的生财风向标拆解智能体">
+  <title>生财风向标拆解助理</title>
+  <style>
+    :root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif;color:#172033;background:#f4f7fb;line-height:1.65}*{box-sizing:border-box}body{margin:0}.shell{max-width:1080px;margin:auto;padding:32px 18px 64px}.hero{padding:24px 0}.eyebrow{color:#3157b7;font-weight:700}.hero h1{font-size:clamp(32px,6vw,58px);line-height:1.1;margin:8px 0 16px}.hero p{max-width:760px;color:#58657a;font-size:18px}.tags{display:flex;flex-wrap:wrap;gap:8px}.tag{background:#eaf0ff;color:#2852b6;border-radius:999px;padding:5px 12px;font-size:13px}.panel{background:#fff;border:1px solid #e2e8f1;border-radius:18px;padding:26px;box-shadow:0 14px 40px #20345b12;margin-top:22px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}label{display:block;font-weight:700;margin:12px 0 6px}input,textarea,select{width:100%;font:inherit;border:1px solid #cfd8e6;border-radius:10px;padding:11px 12px;background:#fff}textarea{min-height:220px;resize:vertical}.hint{font-size:13px;color:#6b778b;margin-top:6px}.actions{display:flex;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}button{border:0;border-radius:10px;padding:12px 19px;font:inherit;font-weight:700;cursor:pointer}.primary{background:#2454c6;color:#fff}.secondary{background:#edf2ff;color:#244ea9}.primary:disabled{opacity:.55;cursor:wait}.status{font-size:14px;color:#58657a}.error{background:#fff0f0;color:#a32323;border:1px solid #ffd2d2;border-radius:10px;padding:12px;margin-top:16px}.result{display:none}.result.show{display:block}.result h2{margin-top:0}.result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{border:1px solid #e4e9f1;border-radius:12px;padding:15px;background:#fbfcfe}.card h3{margin:0 0 7px;font-size:16px;color:#244ea9}.card ul{margin:0;padding-left:20px}.verdict{font-size:20px;font-weight:800;color:#173f9c}.notice{background:#fff8e5;border-left:4px solid #dda400;padding:12px 15px;border-radius:8px;margin-top:18px}.meta{color:#778296;font-size:12px;margin-top:14px}.footer{color:#687386;font-size:14px;margin-top:28px}code{background:#eef2f7;padding:2px 5px;border-radius:4px}@media(max-width:760px){.grid,.result-grid{grid-template-columns:1fr}.panel{padding:18px}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <header class="hero">
+    <div class="eyebrow">Agent 航海 · 第六关可运行成果</div>
+    <h1>生财风向标拆解助理</h1>
+    <p>粘贴一条风向标、项目机会或业务观察，智能体会区分事实与推断，识别风险，并给出可以立刻执行的 7 天验证方案。</p>
+    <div class="tags"><span class="tag">真实模型调用</span><span class="tag">结构化输出</span><span class="tag">证据优先</span><span class="tag">人工决策</span></div>
+  </header>
+
+  <section class="panel" aria-labelledby="workbench-title">
+    <h2 id="workbench-title">直接使用智能体</h2>
+    <div class="grid">
+      <div>
+        <label for="title">风向标标题</label>
+        <input id="title" maxlength="160" placeholder="例如：AI Agent 帮助本地商家自动做短视频">
+      </div>
+      <div>
+        <label for="goal">你最想判断什么</label>
+        <select id="goal">
+          <option value="是否值得投入时间验证">是否值得投入时间验证</option>
+          <option value="目标用户和真实痛点是否成立">用户与痛点是否成立</option>
+          <option value="如何设计7天最小实验">如何设计 7 天实验</option>
+          <option value="有哪些内容选题角度">有哪些内容选题角度</option>
+        </select>
+      </div>
+    </div>
+    <label for="content">原始材料</label>
+    <textarea id="content" maxlength="6000" placeholder="粘贴正文、摘要、观察记录或项目描述。请勿提交密钥、隐私或无权处理的内容。"></textarea>
+    <div class="hint"><span id="counter">0</span>/6000 字；内容仅用于本次模型分析，不会写入 SCYS 或对外发布。</div>
+    <div class="actions">
+      <button class="primary" id="run" type="button">开始拆解</button>
+      <button class="secondary" id="sample" type="button">填入测试样例</button>
+      <span class="status" id="status" aria-live="polite"></span>
+    </div>
+    <div id="error" class="error" role="alert" hidden></div>
+  </section>
+
+  <section id="result" class="panel result" aria-labelledby="result-title">
+    <h2 id="result-title">智能体输出</h2>
+    <p class="verdict" id="verdict"></p>
+    <div class="result-grid">
+      <article class="card"><h3>已确认事实</h3><ul id="facts"></ul></article>
+      <article class="card"><h3>判断与推断</h3><ul id="inferences"></ul></article>
+      <article class="card"><h3>目标用户与痛点</h3><p id="audience"></p></article>
+      <article class="card"><h3>最大风险假设</h3><p id="risk"></p></article>
+      <article class="card"><h3>7 天验证实验</h3><p id="experiment"></p></article>
+      <article class="card"><h3>成功指标 / 停止条件</h3><p><b>成功：</b><span id="success"></span></p><p><b>停止：</b><span id="stop"></span></p></article>
+      <article class="card"><h3>内容选题</h3><ul id="angles"></ul></article>
+      <article class="card"><h3>需要人工确认</h3><ul id="confirmations"></ul></article>
+    </div>
+    <div class="notice"><b>边界：</b>这是研究和验证建议，不是投资、法律或收益承诺。涉及发布、付费、联系他人和账户操作时，必须由人确认。</div>
+    <div class="meta" id="meta"></div>
+  </section>
+
+  <p class="footer">公开版不使用用户的 SCYS 会员凭据；请输入你有权处理的材料。服务端调用 Vercel AI Gateway，凭据不会进入浏览器。</p>
 </main>
+<script>
+const $=id=>document.getElementById(id);const content=$('content');content.addEventListener('input',()=>{$('counter').textContent=content.value.length});
+$('sample').addEventListener('click',()=>{$('title').value='AI Agent 帮本地餐饮店批量生成短视频脚本';content.value='观察：不少本地餐饮店老板知道短视频重要，但没有时间稳定更新。设想提供一个 Agent：商家输入菜品、活动和门店特色，系统生成短视频选题、口播稿和拍摄清单。目前只有三位店主口头表示感兴趣，还没有付费测试，也不清楚他们是否愿意持续提供素材。';content.dispatchEvent(new Event('input'));});
+function list(id,items){$(id).innerHTML='';(items||[]).forEach(x=>{const li=document.createElement('li');li.textContent=x;$(id).appendChild(li)})}
+$('run').addEventListener('click',async()=>{const title=$('title').value.trim(),raw=content.value.trim(),goal=$('goal').value;$('error').hidden=true;$('result').classList.remove('show');if(!title||raw.length<30){$('error').textContent='请填写标题，并提供至少 30 个字的原始材料。';$('error').hidden=false;return}const btn=$('run');btn.disabled=true;$('status').textContent='智能体正在拆解，请稍候…';try{const res=await fetch('/api/analyze',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({title,content:raw,goal})});const payload=await res.json();if(!res.ok)throw new Error(payload.error||'调用失败');const d=payload.data;$('verdict').textContent=d.verdict;list('facts',d.facts);list('inferences',d.inferences);$('audience').textContent=d.audience_and_pain;$('risk').textContent=d.riskiest_assumption;$('experiment').textContent=d.seven_day_experiment;$('success').textContent=d.success_metric;$('stop').textContent=d.stop_condition;list('angles',d.content_angles);list('confirmations',d.human_confirmations);$('meta').textContent=`模型：${payload.meta.model} · 运行编号：${payload.meta.requestId}`;$('result').classList.add('show');$('result').scrollIntoView({behavior:'smooth'});$('status').textContent='拆解完成';}catch(e){$('error').textContent=e.message;$('error').hidden=false;$('status').textContent=''}finally{btn.disabled=false}});
+</script>
+</body>
 </html>
